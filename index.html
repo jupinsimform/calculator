@@ -21,66 +21,68 @@
         </div>
 
         <div class="row">
-          <button class="dal">MC</button>
-          <button class="dal">MR</button>
-          <button class="w-520">M+</button>
-          <button class="w-520">M-</button>
-          <button class="w-520">MS</button>
+          <button class="dal" id="mem_clear">MC</button>
+          <button class="dal" id="mem_recall">MR</button>
+          <button class="w-520" id="mem_plus">M+</button>
+          <button class="w-520" id="mem_minus">M-</button>
+          <button class="w-520" id="mem_store">MS</button>
         </div>
-        <div class="row w-48">
+        <div class="row w-60">
           <button>
+            <img src="./images/right-angled-triangle.svg" alt="Trigonometry" />
             Trigonometry <span><i class="fa-solid fa-angle-down"></i></span>
           </button>
           <button>
-            𝑓 Function <span><i class="fa-solid fa-angle-down"></i></span>
+            <span style="font-size: 18px">&#402;</span> Function
+            <span><i class="fa-solid fa-angle-down"></i></span>
           </button>
         </div>
         <div class="row">
           <button class="btn">2<sup>nd</sup></button>
-          <button class="btn">π</button>
-          <button class="btn">e</button>
+          <button class="btn show">π</button>
+          <button class="btn show">e</button>
           <button class="btn" id="clear">C</button>
           <button class="btn back">
             <i class="fa-sharp fa-solid fa-delete-left"></i>
           </button>
         </div>
         <div class="row">
-          <button class="btn">x<sup>2</sup></button>
-          <button class="btn">1/x</button>
-          <button class="btn">|x|</button>
-          <button class="btn">exp</button>
-          <button class="btn show">%</button>
+          <button class="btn" onclick="restTo2()">x<sup>2</sup></button>
+          <button class="btn" onclick="by_x()">1/x</button>
+          <button class="btn" onclick="absolute()">|x|</button>
+          <button class="btn" onclick="exponential()">exp</button>
+          <button class="btn show mod">%</button>
         </div>
         <div class="row">
-          <button class="btn"><sup>2</sup>√x</button>
+          <button class="btn" onclick="squr_root()"><sup>2</sup>√x</button>
           <button class="btn show">(</button>
           <button class="btn show">)</button>
-          <button class="btn"><i>n!</i></button>
+          <button class="btn fact"><i>n!</i></button>
           <button class="btn show">÷</button>
         </div>
         <div class="row">
-          <button class="btn">x<sup>y</sup></button>
+          <button class="btn show">x<sup>y</sup></button>
           <button class="btn num show">7</button>
           <button class="btn num show">8</button>
           <button class="btn num show">9</button>
           <button class="btn show">×</button>
         </div>
         <div class="row">
-          <button class="btn">10<sup>x</sup></button>
+          <button class="btn" onclick="ten_x()">10<sup>x</sup></button>
           <button class="btn num show">4</button>
           <button class="btn num show">5</button>
           <button class="btn num show">6</button>
           <button class="btn show">-</button>
         </div>
         <div class="row">
-          <button class="btn">log</button>
+          <button class="btn" onclick="log()">log</button>
           <button class="btn num show">1</button>
           <button class="btn num show">2</button>
           <button class="btn num show">3</button>
           <button class="btn show">+</button>
         </div>
         <div class="row">
-          <button class="btn">In</button>
+          <button class="btn" onclick="ln()">ln</button>
           <button class="btn num">+/-</button>
           <button class="btn num show">0</button>
           <button class="btn num show">.</button>
@@ -89,9 +91,10 @@
       </div>
     </div>
     <script
+      async
       src="https://kit.fontawesome.com/5f35126798.js"
       crossorigin="anonymous"
     ></script>
-    <script src="app.js"></script>
+    <script defer src="app.js"></script>
   </body>
 </html>
