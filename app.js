@@ -17,6 +17,12 @@ let add = /(\d+(?:\.\d+)?) ?\+ ?(\d+(?:\.\d+)?)/; // Regex for identifying addit
 let sub = /(\d+(?:\.\d+)?) ?- ?(\d+(?:\.\d+)?)/; // Regex for identifying subtraction (x - y)
 let mode = /(\d+(?:\.\d+)?) ?% ?(\d+(?:\.\d+)?)/; // Regex for identifying modulo (x % y)
 let squr = /(\d+(?:\.\d+)?) ?\^ ?(\d+(?:\.\d+)?)/; // Regex for identifying modulo (x % y)
+let tan = /tan(\d+)/;
+let sin = /sin(\d+)/;
+let cos = /cos(\d+)/;
+let arcTan = /arcTan(.)*(\d+)/;
+let arcSin = /arcSin(.)*(\d+)/;
+let arcCos = /arcCos(.)*(\d+)/;
 
 for (item of show) {
   item.addEventListener("click", (e) => {
@@ -24,8 +30,8 @@ for (item of show) {
     if (btntext == "÷") {
       btntext = "/";
     }
-
     if (btntext == "×") {
+      console.log(btntext);
       btntext = "*";
     }
     if (btntext == "π") {
@@ -37,12 +43,21 @@ for (item of show) {
     if (btntext == "xy") {
       btntext = "^";
     }
+    if (btntext == "tan-1") {
+      btntext = "arcTan";
+    }
+    if (btntext == "sin-1") {
+      btntext = "arcSin";
+    }
+    if (btntext == "cos-1") {
+      btntext = "arcCos";
+    }
     input.value += btntext;
   });
 }
 
 memory_store.addEventListener("click", function () {
-  let int = parseInt(input.value);
+  let int = Number(input.value);
   let arr;
   if (localStorage.getItem("arr") === null) {
     arr = " ";
@@ -55,8 +70,8 @@ memory_store.addEventListener("click", function () {
 });
 
 memory_plus.addEventListener("click", function () {
-  let int = parseInt(input.value);
-  int = int + parseInt(localStorage.getItem("arr"));
+  let int = Number(input.value);
+  int = int + Number(localStorage.getItem("arr"));
 
   localStorage.setItem("arr", JSON.stringify(int));
 
@@ -64,8 +79,8 @@ memory_plus.addEventListener("click", function () {
 });
 
 memory_minus.addEventListener("click", function () {
-  let int = parseInt(input.value);
-  int = int - parseInt(localStorage.getItem("arr"));
+  let int = Number(input.value);
+  int = int - Number(localStorage.getItem("arr"));
 
   localStorage.setItem("arr", JSON.stringify(int));
 
@@ -81,48 +96,127 @@ memory_clear.addEventListener("click", function () {
   input.value = " ";
 });
 
-function restTo2() {
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("shown");
+}
+function myFunction2() {
+  document.getElementById("myDropdown2").classList.toggle("shown");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("shown")) {
+        openDropdown.classList.remove("shown");
+      }
+    }
+  }
+};
+
+function degToRad() {
+  let unit = document.getElementById("toggle").innerHTML;
+  if (unit == "DEG") {
+    input.value =
+      ((Number(input.value) * 180) / Math.PI).toFixed(2).toString() + "°";
+    document.getElementById("toggle").innerHTML = "RAD";
+  } else if (unit == "RAD") {
+    // console.log(input.value);
+    input.value = ((Number(input.value.slice(0, -1)) * Math.PI) / 180)
+      .toFixed(2)
+      .toString();
+    document.getElementById("toggle").innerHTML = "DEG";
+  }
+}
+
+function featureToggle() {
+  let unit = document.getElementById("otherFun").innerText;
+  // console.log(unit);
+  if (unit == "2nd") {
+    document.getElementById("restTo3").style.display = "block";
+    document.getElementById("cuberoot").style.display = "block";
+    document.getElementById("y-squrroot-x").style.display = "block";
+    document.getElementById("twox").style.display = "block";
+    document.getElementById("xbasey").style.display = "block";
+    document.getElementById("exponential").style.display = "block";
+
+    document.getElementById("restTo2").style.display = "none";
+    document.getElementById("squrroot").style.display = "none";
+    document.getElementById("x-restTo-y").style.display = "none";
+    document.getElementById("tenx").style.display = "none";
+    document.getElementById("log").style.display = "none";
+    document.getElementById("ln").style.display = "none";
+
+    document.getElementById("otherFun").innerHTML =
+      "<span>1<sup>st</sup></span>";
+  } else if (unit == "1st") {
+    document.getElementById("restTo3").style.display = "none";
+    document.getElementById("cuberoot").style.display = "none";
+    document.getElementById("y-squrroot-x").style.display = "none";
+    document.getElementById("twox").style.display = "none";
+    document.getElementById("xbasey").style.display = "none";
+    document.getElementById("exponential").style.display = "none";
+
+    document.getElementById("restTo2").style.display = "block";
+    document.getElementById("squrroot").style.display = "block";
+    document.getElementById("x-restTo-y").style.display = "block";
+    document.getElementById("tenx").style.display = "block";
+    document.getElementById("log").style.display = "block";
+    document.getElementById("ln").style.display = "block";
+
+    document.getElementById("otherFun").innerHTML =
+      "<span>2<sup>nd</sup></span>";
+  }
+}
+
+function floor() {
+  input.value = Math.floor(Number(input.value)).toString();
+}
+
+function ceil() {
+  input.value = Math.ceil(Number(input.value)).toString();
+}
+
+function restTo_2() {
   let int = parseInt(input.value);
-  input.value = Math.pow(int, 2).toString();
+  input.value = Math.pow(Number(input.value), 2).toString();
 }
 
 function by_x() {
-  let int = 1 / parseInt(input.value);
-  input.value = int.toString();
+  input.value = 1 / Number(input.value).toString();
 }
 
 function absolute() {
-  let int = parseInt(input.value);
-  input.value = Math.abs(int).toString();
+  input.value = Math.abs(Number(input.value)).toString();
 }
 
 function exponential() {
-  let int = parseInt(input.value);
-  input.value = Math.pow(2.718281828459, int).toString();
+  input.value = Math.pow(2.718281828459, Number(input.value)).toString();
 }
 
 function squr_root() {
-  let int = parseInt(input.value);
-  input.value = Math.sqrt(int).toString();
+  input.value = Math.sqrt(Number(input.value)).toString();
 }
 
 function ten_x() {
-  let int = parseInt(input.value);
-  input.value = Math.pow(10, int).toString();
+  input.value = Math.pow(10, Number(input.value)).toString();
 }
 
 function log() {
-  let int = parseInt(input.value);
-  input.value = Math.log10(int).toString();
+  input.value = Math.log10(Number(input.value)).toString();
 }
 
 function ln() {
-  let int = parseInt(input.value);
-  input.value = Math.log(int).toString();
+  input.value = Math.log(Number(input.value)).toString();
 }
 
 fact.addEventListener("click", function () {
-  let int = parseInt(input.value);
+  let int = Number(input.value);
   if (int == 0 || int == 1) {
     int = 1;
   } else {
@@ -152,15 +246,15 @@ function evaluate(expr) {
         return evaluate(subExpr);
       });
       return evaluate(newExpr);
-    } else if (mul.test(expr)) {
-      let newExpr = expr.replace(mul, function (match, a, b) {
-        return Number(a) * Number(b);
-      });
-      return evaluate(newExpr);
     } else if (div.test(expr)) {
       let newExpr = expr.replace(div, function (match, a, b) {
         if (b != 0) return Number(a) / Number(b);
         else throw new Error("Division by zero");
+      });
+      return evaluate(newExpr);
+    } else if (mul.test(expr)) {
+      let newExpr = expr.replace(mul, function (match, a, b) {
+        return Number(a) * Number(b);
       });
       return evaluate(newExpr);
     } else if (add.test(expr)) {
@@ -183,6 +277,29 @@ function evaluate(expr) {
         return Math.pow(Number(a), Number(b));
       });
       return evaluate(newExpr);
+    } else if (tan.test(expr)) {
+      let ans = Math.tan((Number(expr.slice(3)) * Math.PI) / 180);
+      // console.log(ans);
+      return evaluate(ans.toFixed(3).toString());
+    } else if (sin.test(expr)) {
+      let ans = Math.sin((Number(expr.slice(3)) * Math.PI) / 180);
+      return evaluate(ans.toFixed(3).toString());
+    } else if (cos.test(expr)) {
+      let ans = Math.cos((Number(expr.slice(3)) * Math.PI) / 180);
+      return evaluate(ans.toFixed(3).toString());
+    } else if (arcTan.test(expr)) {
+      console.log(expr);
+      let ans = (Math.atan(Number(expr.slice(6))) * 180) / Math.PI;
+      console.log(ans);
+      return evaluate(ans.toFixed(2).toString() + "°");
+    } else if (arcSin.test(expr)) {
+      let ans = (Math.asin(Number(expr.slice(6))) * 180) / Math.PI;
+      console.log(typeof ans);
+      return evaluate(ans.toFixed(2).toString() + "°");
+    } else if (arcCos.test(expr)) {
+      let ans = (Math.acos(Number(expr.slice(6))) * 180) / Math.PI;
+      console.log(typeof ans);
+      return evaluate(ans.toFixed(2).toString() + "°");
     } else {
       return expr;
     }
@@ -192,5 +309,5 @@ function evaluate(expr) {
 
 // clear input area
 clear.addEventListener("click", () => {
-  input.value = " ";
+  input.value = "";
 });

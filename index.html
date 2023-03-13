@@ -16,7 +16,7 @@
 
       <div class="btns">
         <div class="row w-33">
-          <button class="w-520">DEG</button>
+          <button class="w-520" id="toggle" onclick="degToRad()">DEG</button>
           <button class="w-520">F-E</button>
         </div>
 
@@ -28,17 +28,51 @@
           <button class="w-520" id="mem_store">MS</button>
         </div>
         <div class="row w-60">
-          <button>
-            <img src="./images/right-angled-triangle.svg" alt="Trigonometry" />
-            Trigonometry <span><i class="fa-solid fa-angle-down"></i></span>
-          </button>
-          <button>
-            <span style="font-size: 18px">&#402;</span> Function
-            <span><i class="fa-solid fa-angle-down"></i></span>
-          </button>
+          <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">
+              <img
+                src="./images/right-angled-triangle.svg"
+                alt="Trigonometry"
+              />
+              Trigonometry <span><i class="fa-solid fa-angle-down"></i></span>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <div class="multi-col">
+                <div class="btn-vertical-group">
+                  <button class="show">tan</button>
+                  <button class="show">sin</button>
+                  <button class="show">cos</button>
+                </div>
+
+                <div class="btn-vertical-group">
+                  <button class="show">
+                    <span>tan<sup>-1</sup></span>
+                  </button>
+                  <button class="show">
+                    <span>sin<sup>-1</sup></span>
+                  </button>
+                  <button class="show">
+                    <span>cos<sup>-1</sup></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button onclick="myFunction2()" class="dropbtn">
+              <span style="font-size: 18px">&#402;</span> Function
+              <span><i class="fa-solid fa-angle-down"></i></span>
+            </button>
+            <div class="dropdown-content" id="myDropdown2">
+              <button onclick="floor()">⌊x⌋</button>
+              <button onclick="ceil()">⌈x⌉</button>
+            </div>
+          </div>
         </div>
         <div class="row">
-          <button class="btn">2<sup>nd</sup></button>
+          <button class="btn" id="otherFun" onclick="featureToggle()">
+            <span>2<sup>nd</sup></span>
+          </button>
           <button class="btn show">π</button>
           <button class="btn show">e</button>
           <button class="btn" id="clear">C</button>
@@ -47,42 +81,70 @@
           </button>
         </div>
         <div class="row">
-          <button class="btn" onclick="restTo2()">x<sup>2</sup></button>
+          <button class="btn hiddenbtn" id="restTo3" onclick="restTo_3()">
+            x<sup>3</sup>
+          </button>
+          <button class="btn" id="restTo2" onclick="restTo_2()">
+            x<sup>2</sup>
+          </button>
           <button class="btn" onclick="by_x()">1/x</button>
           <button class="btn" onclick="absolute()">|x|</button>
           <button class="btn" onclick="exponential()">exp</button>
           <button class="btn show mod">%</button>
         </div>
         <div class="row">
-          <button class="btn" onclick="squr_root()"><sup>2</sup>√x</button>
+          <button class="btn hiddenbtn" id="cuberoot" onclick="cube_root()">
+            <sup>3</sup>√x
+          </button>
+          <button class="btn" id="squrroot" onclick="squr_root()">
+            <sup>2</sup>√x
+          </button>
           <button class="btn show">(</button>
           <button class="btn show">)</button>
           <button class="btn fact"><i>n!</i></button>
           <button class="btn show">÷</button>
         </div>
         <div class="row">
-          <button class="btn show">x<sup>y</sup></button>
+          <button id="y-squrroot-x" class="btn hiddenbtn">
+            <sup>y</sup>√x
+          </button>
+          <button id="x-restTo-y" class="btn show">x<sup>y</sup></button>
           <button class="btn num show">7</button>
           <button class="btn num show">8</button>
           <button class="btn num show">9</button>
           <button class="btn show">×</button>
         </div>
         <div class="row">
-          <button class="btn" onclick="ten_x()">10<sup>x</sup></button>
+          <button class="btn hiddenbtn" id="twox" onclick="two_x()">
+            2<sup>x</sup>
+          </button>
+          <button class="btn" id="tenx" onclick="ten_x()">
+            10<sup>x</sup>
+          </button>
           <button class="btn num show">4</button>
           <button class="btn num show">5</button>
           <button class="btn num show">6</button>
           <button class="btn show">-</button>
         </div>
         <div class="row">
-          <button class="btn" onclick="log()">log</button>
+          <button class="btn hiddenbtn" id="xbasey" onclick="logX_b_y()">
+            log<sub>y</sub>x
+          </button>
+          <button class="btn" id="log" onclick="log()">log</button>
           <button class="btn num show">1</button>
           <button class="btn num show">2</button>
           <button class="btn num show">3</button>
           <button class="btn show">+</button>
         </div>
         <div class="row">
-          <button class="btn" onclick="ln()">ln</button>
+          <button
+            class="btn hiddenbtn"
+            id="exponential"
+            onclick="exponential()"
+          >
+            e<sup>x</sup>
+          </button>
+          <button class="btn" id="ln" onclick="ln()">ln</button>
           <button class="btn num">+/-</button>
           <button class="btn num show">0</button>
           <button class="btn num show">.</button>
